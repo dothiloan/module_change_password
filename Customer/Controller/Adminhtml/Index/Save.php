@@ -3,7 +3,7 @@
  * Copyright Â© Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Pfay\Contacts\Controller\Adminhtml\Index;
+namespace LOANDT\Customer\Controller\Adminhtml\Index;
 
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Api\AddressRepositoryInterface;
@@ -24,7 +24,7 @@ use Magento\Customer\Model\Metadata\Form;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\App\ObjectManager;
-use Pfay\Contacts\Helper\Data;
+use LOANDT\Customer\Helper\Data;
 
 /**
  * Save customer action.
@@ -146,7 +146,7 @@ class Save extends \Magento\Customer\Controller\Adminhtml\Index\Save
     {
         $returnToEdit = false;
         $originalRequestData = $this->getRequest()->getPostValue();
-
+       
         $customerId = $this->helper->getCurrentCustomerId();
 
         if ($originalRequestData) {
@@ -156,8 +156,8 @@ class Save extends \Magento\Customer\Controller\Adminhtml\Index\Save
 
                 $data = $this->getRequest()->getParams();
 				$passwordReset = $data['customer']['password_hash'];
-				$objectHas = $this->_objectManager->create('Magento\Framework\Encryption\EncryptorInterface');
-				$has_password = $objectHas->getHash($passwordReset, true);
+				$objectHash = $this->_objectManager->create('Magento\Framework\Encryption\EncryptorInterface');
+                $hash_password = $objectHash->getHash($passwordReset, true);
 
 				// $customerData['password_hash'] = $has_password;
 
@@ -191,12 +191,12 @@ class Save extends \Magento\Customer\Controller\Adminhtml\Index\Save
 
                 // Save customer
                 if ($customerId) {
-                	// $customer->setPasswordHash($has_password);
-                    $this->_customerRepository->save($customer, $has_password);
+
+                    $this->_customerRepository->save($customer, $hash_password);
 
                     $this->helper->getEmailNotification()->credentialsChanged($customer, $currentCustomer->getEmail());
                 } else {
-                    $customer = $this->customerAccountManagement->createAccount($customer);
+                    $customer = $this->customerAccountManagement->createAccountWithPasswordHash($customer, $hash_password);
                     $customerId = $customer->getId();
                 }
 

@@ -6,4 +6,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Pfay_Contacts', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'LOANDT_Customer', __DIR__);

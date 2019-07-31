@@ -1,5 +1,5 @@
 <?php
-namespace Pfay\Contacts\Helper;
+namespace LOANDT\Customer\Helper;
 
 use \Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Customer\Api\CustomerMetadataInterface;
