@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="LOANDT_Testimonial::index" title="Testimonial" translate="title" module="LOANDT_Testimonial" sortOrder="20" resource="LOANDT_Testimonial::index"/>
+        <add id="LOANDT_Testimonial::list" title="List of Testimonial" translate="title" module="LOANDT_Testimonial" sortOrder="10" parent="LOANDT_Testimonial::index" action="testimonial/index/index" resource="LOANDT_Testimonial::list"/>
+    </menu>
+</config>
